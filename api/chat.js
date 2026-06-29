@@ -17,9 +17,8 @@ export default async function handler(req, res) {
       parts: [{ text: m.content }],
     }));
 
-    // Use gemini-1.5-flash — free tier compatible
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -33,7 +32,6 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    // Log error details for debugging
     if (!response.ok) {
       console.error("Gemini error:", JSON.stringify(data));
       return res.status(500).json({ error: data?.error?.message || "Gemini API error" });
@@ -47,7 +45,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ reply: text });
   } catch (err) {
-    console.error("Catch error:", err.message);
+    console.error("Server error:", err.message);
     return res.status(500).json({ error: err.message });
   }
 }
