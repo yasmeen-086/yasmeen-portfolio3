@@ -17,8 +17,9 @@ export default async function handler(req, res) {
       parts: [{ text: m.content }],
     }));
 
+    // Use gemini-1.5-flash — free tier compatible
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,15 +33,21 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
+    // Log error details for debugging
     if (!response.ok) {
-      return res.status(500).json({ error: data?.error?.message || "Gemini error" });
+      console.error("Gemini error:", JSON.stringify(data));
+      return res.status(500).json({ error: data?.error?.message || "Gemini API error" });
     }
 
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text) return res.status(500).json({ error: "No response from Gemini" });
+    if (!text) {
+      console.error("No text in response:", JSON.stringify(data));
+      return res.status(500).json({ error: "No response text from Gemini" });
+    }
 
     return res.status(200).json({ reply: text });
   } catch (err) {
+    console.error("Catch error:", err.message);
     return res.status(500).json({ error: err.message });
   }
 }
