@@ -7,12 +7,11 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   const apiKey = process.env.VITE_GEMINI_KEY;
-  if (!apiKey) return res.status(500).json({ error: "API key not configured - check env vars" });
+  if (!apiKey) return res.status(500).json({ error: "API key not configured" });
 
   const { messages, system } = req.body;
 
   try {
-    // Build contents - filter out any invalid messages
     const contents = [];
     for (const m of messages) {
       if (m.content && m.content.trim()) {
@@ -23,25 +22,23 @@ export default async function handler(req, res) {
       }
     }
 
-    // Gemini requires alternating user/model turns - ensure starts with user
-    const filteredContents = [];
-    for (let i = 0; i < contents.length; i++) {
-      if (i === 0 && contents[i].role === "model") continue;
-      filteredContents.push(contents[i]);
+    // Ensure starts with user turn
+    while (contents.length > 0 && contents[0].role === "model") {
+      contents.shift();
     }
 
     const body = {
-      contents: filteredContents,
+      contents,
       generationConfig: { maxOutputTokens: 300, temperature: 0.7 },
     };
 
-    // Add system instruction if provided
     if (system) {
       body.system_instruction = { parts: [{ text: system }] };
     }
 
+    // Use v1 instead of v1beta, and correct model name
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-001:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -52,22 +49,16 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Gemini API error:", JSON.stringify(data));
-      return res.status(500).json({ 
-        error: data?.error?.message || "Gemini API error",
-        details: data?.error 
-      });
+      console.error("Gemini error:", JSON.stringify(data));
+      return res.status(500).json({ error: data?.error?.message || "Gemini error" });
     }
 
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text) {
-      console.error("Empty response:", JSON.stringify(data));
-      return res.status(500).json({ error: "Empty response from Gemini" });
-    }
+    if (!text) return res.status(500).json({ error: "Empty response" });
 
     return res.status(200).json({ reply: text });
   } catch (err) {
-    console.error("Handler error:", err);
+    console.error("Error:", err);
     return res.status(500).json({ error: err.message });
   }
 }
