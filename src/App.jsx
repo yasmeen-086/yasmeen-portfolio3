@@ -211,7 +211,7 @@ function Counter({ n, suffix, label }) {
   const c = useCountUp(n, v);
   return (
     <div ref={ref} style={{ opacity: v ? 1 : 0, transform: v ? "none" : "translateY(20px)", transition: "all .8s ease" }}>
-      <div style={{ fontSize: "clamp(40px,5vw,64px)", fontWeight: 900, fontFamily: "'Bebas Neue', sans-serif", color: "#fff", lineHeight: 1, letterSpacing: 2 }}>{c}{suffix}</div>
+      <div style={{ fontSize: "clamp(40px,5vw,64px)", fontWeight: 900, fontFamily: "'Space Grotesk', sans-serif", color: "#fff", lineHeight: 1, letterSpacing: 2 }}>{c}{suffix}</div>
       <div style={{ fontSize: 11, color: "#3a4a5a", fontWeight: 700, letterSpacing: 2.5, textTransform: "uppercase", marginTop: 6, fontFamily: "'Space Grotesk', sans-serif" }}>{label}</div>
     </div>
   );
@@ -280,7 +280,7 @@ function ProjectCard({ p, i }) {
       <div style={{ fontSize: 10, color: p.color, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, letterSpacing: 2, marginBottom: 8, textTransform: "uppercase" }}>{p.cat}</div>
 
       {/* title */}
-      <h3 style={{ fontSize: 19, fontWeight: 800, color: "#f1f5f9", marginBottom: 12, fontFamily: "'Syne', sans-serif", lineHeight: 1.25 }}>{p.title}</h3>
+      <h3 style={{ fontSize: 19, fontWeight: 800, color: "#f1f5f9", marginBottom: 12, fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1.25 }}>{p.title}</h3>
 
       {/* desc */}
       <p style={{ fontSize: 13.5, color: "#4a6a7a", lineHeight: 1.75, marginBottom: 20 }}>{p.desc}</p>
@@ -289,7 +289,7 @@ function ProjectCard({ p, i }) {
       <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
         {p.metrics.map(({ v: val, l }) => (
           <div key={l} style={{ flex: 1, textAlign: "center", padding: "9px 6px", borderRadius: 10, background: `${p.color}0b`, border: `1px solid ${p.color}25` }}>
-            <div style={{ fontSize: 15, fontWeight: 800, color: p.color, fontFamily: "'Bebas Neue', sans-serif", letterSpacing: 1 }}>{val}</div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: p.color, fontFamily: "'Space Grotesk', sans-serif", letterSpacing: 1 }}>{val}</div>
             <div style={{ fontSize: 10, color: "#3a4a5a", marginTop: 3, fontWeight: 700, letterSpacing: .5, fontFamily: "'Space Grotesk', sans-serif" }}>{l}</div>
           </div>
         ))}
@@ -405,8 +405,8 @@ Contact: yasmeenn00786@gmail.com | github.com/yasmeen-086`;
       const data = await res.json();
       const reply = data.reply || "Sorry, couldn't get a response. Try again!";
       setMsgs(m => [...m, { role: "assistant", text: reply }]);
-    } catch {
-      setMsgs(m => [...m, { role: "assistant", text: "Something went wrong. Please try again!" }]);
+    } catch (err) {
+      setMsgs(m => [...m, { role: "assistant", text: "⚠️ Chatbot is being set up. Please check back soon!" }]);
     }
     setLoading(false);
   };
@@ -475,7 +475,7 @@ Contact: yasmeenn00786@gmail.com | github.com/yasmeen-086`;
           {/* Avatar */}
           <div style={{ width: 44, height: 44, borderRadius: "50%", background: "linear-gradient(135deg, #00E5FF22, #BF5FFF33)", border: "1.5px solid rgba(0,229,255,0.35)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0, boxShadow: "0 0 20px rgba(0,229,255,0.15)" }}>✦</div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 14, fontWeight: 900, color: "#fff", fontFamily: "'Syne', sans-serif", letterSpacing: 0.3 }}>Yasmeen's AI Assistant</div>
+            <div style={{ fontSize: 14, fontWeight: 900, color: "#fff", fontFamily: "'Space Grotesk', sans-serif", letterSpacing: 0.3 }}>Yasmeen's AI Assistant</div>
             <div style={{ fontSize: 11, color: "#4a6a7a", fontWeight: 600, display: "flex", alignItems: "center", gap: 6, marginTop: 2, fontFamily: "'Space Grotesk', sans-serif" }}>
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#00FF9D", display: "inline-block", boxShadow: "0 0 6px #00FF9D" }} />
               Online · Knows everything about my resume
@@ -550,7 +550,7 @@ Contact: yasmeenn00786@gmail.com | github.com/yasmeen-086`;
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => { if (e.key === "Enter") sendMsg(); }}
               placeholder="Ask anything about Yasmeen..."
-              style={{ flex: 1, background: "transparent", border: "none", color: "#e2eaf2", fontSize: 13.5, outline: "none", padding: "8px 0", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
+              style={{ flex: 1, background: "transparent", border: "none", color: "#e2eaf2", fontSize: 13.5, outline: "none", padding: "8px 0", fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
             />
             <button onClick={() => sendMsg()} disabled={loading || !input.trim()} style={{
               width: 38, height: 38, borderRadius: 10, border: "none",
@@ -588,7 +588,7 @@ export default function Portfolio() {
   return (
     <div style={{ background: "#0B0F19", minHeight: "100vh", color: "#F8FAFC", fontFamily: "'Inter', sans-serif", overflowX: "hidden", opacity: loaded ? 1 : 0, transition: "opacity .4s", cursor: "none" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Bebas+Neue&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth}
         ::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:#020408}::-webkit-scrollbar-thumb{background:#00E5FF}
@@ -636,7 +636,7 @@ export default function Portfolio() {
               </linearGradient>
             </defs>
           </svg>
-          <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900, fontSize: 14, color: "#fff", letterSpacing: 2, textTransform: "uppercase" }}>Yasmeen</span>
+          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, fontSize: 14, color: "#fff", letterSpacing: 2, textTransform: "uppercase" }}>Yasmeen</span>
         </div>
         <div style={{ display: "flex", gap: 0 }}>
           {["about","skills","projects","education","contact"].map(id => (
@@ -668,11 +668,10 @@ export default function Portfolio() {
           </div>
 
           {/* headline */}
-          <h1 style={{ fontSize: "clamp(52px,8.5vw,110px)", fontFamily: "'Syne', sans-serif", fontWeight: 900, lineHeight: 0.95, letterSpacing: -3, marginBottom: 32, animation: "fadeUp .9s ease .35s both" }}>
-            <span style={{ display: "block", color: "#fff" }}>Building</span>
-            <span style={{ display: "block", color: "#fff" }}>intelligent</span>
-            <span style={{ display: "block", WebkitTextStroke: "2px #00E5FF", color: "transparent", animation: "glow 3s ease infinite" }}>
-              {typed}<span style={{ animation: "blink 1s step-end infinite", WebkitTextStroke: "2px #00E5FF" }}>_</span>
+          <h1 style={{ fontSize: "clamp(52px,8vw,100px)", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, lineHeight: 1.0, letterSpacing: -3, marginBottom: 24, animation: "fadeUp .9s ease .35s both" }}>
+            <span style={{ display: "block", color: "#F8FAFC" }}>Building intelligent</span>
+            <span style={{ display: "block", fontSize: "clamp(32px,4.5vw,58px)", fontWeight: 700, color: "#00E5FF", letterSpacing: -1, marginTop: 8 }}>
+              {typed}<span style={{ animation: "blink 1s step-end infinite", color: "#00E5FF" }}>_</span>
             </span>
           </h1>
 
@@ -691,7 +690,7 @@ export default function Portfolio() {
         {/* floating badge */}
         <div style={{ position: "absolute", bottom: 60, right: "clamp(20px,8vw,120px)", animation: "float 5s ease-in-out infinite", zIndex: 3 }}>
           <div style={{ background: "rgba(2,4,8,0.7)", border: "1px solid rgba(0,229,255,0.3)", backdropFilter: "blur(16px)", borderRadius: 4, padding: "20px 28px", textAlign: "center" }}>
-            <div style={{ fontSize: 36, fontFamily: "'Bebas Neue', sans-serif", color: "#00E5FF", letterSpacing: 2 }}>6+</div>
+            <div style={{ fontSize: 36, fontFamily: "'Space Grotesk', sans-serif", color: "#00E5FF", letterSpacing: 2 }}>6+</div>
             <div style={{ fontSize: 10, color: "#3a4a5a", fontWeight: 700, letterSpacing: 2.5, textTransform: "uppercase" }}>Projects</div>
           </div>
         </div>
@@ -724,7 +723,7 @@ export default function Portfolio() {
               <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: 4, textTransform: "uppercase", color: "#00E5FF", marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
                 <span style={{ width: 30, height: 1, background: "#00E5FF", display: "inline-block" }} /> About
               </div>
-              <h2 style={{ fontSize: "clamp(36px,5vw,64px)", fontFamily: "'Syne', sans-serif", fontWeight: 900, lineHeight: 1.05, letterSpacing: -2, color: "#fff", marginBottom: 28 }}>
+              <h2 style={{ fontSize: "clamp(36px,5vw,64px)", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, lineHeight: 1.05, letterSpacing: -2, color: "#fff", marginBottom: 28 }}>
                 I make machines<br /><span style={{ color: "#00E5FF" }}>see</span> & <span style={{ color: "#BF5FFF" }}>think</span>
               </h2>
               <p style={{ fontSize: 15, color: "#4a6a7a", lineHeight: 1.9, marginBottom: 18, fontWeight: 500 }}>
@@ -769,7 +768,7 @@ export default function Portfolio() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1, border: "1px solid rgba(255,255,255,0.05)", borderRadius: 4, overflow: "hidden" }}>
                 {[["6+", "Projects"], ["92%", "Best Accuracy"], ["35k+", "Images Trained"], ["4+", "ML Domains"]].map(([n, l], i) => (
                   <div key={l} style={{ padding: "20px 18px", background: i % 2 === 0 ? "rgba(255,255,255,0.015)" : "rgba(0,229,255,0.02)", borderRight: i % 2 === 0 ? "1px solid rgba(255,255,255,0.04)" : "none", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.04)" : "none" }}>
-                    <div style={{ fontSize: 32, fontFamily: "'Bebas Neue', sans-serif", color: "#fff", letterSpacing: 2, lineHeight: 1 }}>{n}</div>
+                    <div style={{ fontSize: 32, fontFamily: "'Space Grotesk', sans-serif", color: "#fff", letterSpacing: 2, lineHeight: 1 }}>{n}</div>
                     <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: "#3a4a5a", marginTop: 5, fontFamily: "'Space Grotesk', sans-serif" }}>{l}</div>
                   </div>
                 ))}
@@ -786,7 +785,7 @@ export default function Portfolio() {
             <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: 4, textTransform: "uppercase", color: "#00E5FF", display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
               <span style={{ width: 30, height: 1, background: "#00E5FF", display: "inline-block" }} /> Capabilities
             </div>
-            <h2 style={{ fontSize: "clamp(28px,4vw,52px)", fontFamily: "'Syne', sans-serif", fontWeight: 900, color: "#fff", letterSpacing: -1.5, marginBottom: 60, lineHeight: 1.1 }}>Skills &<br />Expertise</h2>
+            <h2 style={{ fontSize: "clamp(28px,4vw,52px)", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, color: "#fff", letterSpacing: -1.5, marginBottom: 60, lineHeight: 1.1 }}>Skills &<br />Expertise</h2>
           </R>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "clamp(40px,6vw,80px)", alignItems: "start" }}>
             {/* Left — description */}
@@ -830,7 +829,7 @@ export default function Portfolio() {
                 <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: 4, textTransform: "uppercase", color: "#00E5FF", display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
                   <span style={{ width: 30, height: 1, background: "#00E5FF", display: "inline-block" }} /> Selected Work
                 </div>
-                <h2 style={{ fontSize: "clamp(32px,4.5vw,60px)", fontFamily: "'Syne', sans-serif", fontWeight: 900, color: "#fff", letterSpacing: -2, lineHeight: 1 }}>Projects<br />built</h2>
+                <h2 style={{ fontSize: "clamp(32px,4.5vw,60px)", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, color: "#fff", letterSpacing: -2, lineHeight: 1 }}>Projects<br />built</h2>
               </div>
               <div style={{ fontSize: 12, color: "#3a4a5a", fontWeight: 700, letterSpacing: 1.5 }}>0{PROJECTS.length} Total</div>
             </div>
@@ -848,7 +847,7 @@ export default function Portfolio() {
             <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: 4, textTransform: "uppercase", color: "#00E5FF", display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
               <span style={{ width: 30, height: 1, background: "#00E5FF", display: "inline-block" }} /> Education
             </div>
-            <h2 style={{ fontSize: "clamp(32px,4.5vw,60px)", fontFamily: "'Syne', sans-serif", fontWeight: 900, color: "#fff", letterSpacing: -2, marginBottom: 60, lineHeight: 1 }}>Academic<br />background</h2>
+            <h2 style={{ fontSize: "clamp(32px,4.5vw,60px)", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, color: "#fff", letterSpacing: -2, marginBottom: 60, lineHeight: 1 }}>Academic<br />background</h2>
           </R>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%,420px),1fr))", gap: 2 }}>
             {[
@@ -859,7 +858,7 @@ export default function Portfolio() {
                   <div style={{ position: "absolute", top: -30, right: -30, width: 120, height: 120, borderRadius: "50%", background: e.color, filter: "blur(60px)", opacity: .06 }} />
                   <div style={{ fontSize: 32, marginBottom: 20, animation: "float 5s ease-in-out infinite" }}>{e.icon}</div>
                   <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2.5, color: e.color, marginBottom: 12, textTransform: "uppercase", fontFamily: "'Space Grotesk', sans-serif" }}>{e.year}</div>
-                  <h3 style={{ fontSize: 22, fontFamily: "'Syne', sans-serif", fontWeight: 900, color: "#fff", marginBottom: 6, lineHeight: 1.2 }}>{e.deg}</h3>
+                  <h3 style={{ fontSize: 22, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, color: "#fff", marginBottom: 6, lineHeight: 1.2 }}>{e.deg}</h3>
                   <div style={{ fontSize: 14, color: "#4a6a7a", fontWeight: 600, marginBottom: 20 }}>{e.school} · {e.loc}</div>
                   <div style={{ fontSize: 12, color: "#3a4a5a", padding: "12px 16px", border: "1px solid rgba(255,255,255,0.04)", borderRadius: 3, fontWeight: 600, letterSpacing: 0.3 }}>{e.note}</div>
                 </div>
@@ -877,7 +876,7 @@ export default function Portfolio() {
             <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: 4, textTransform: "uppercase", color: "#00E5FF", display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
               <span style={{ width: 30, height: 1, background: "#00E5FF", display: "inline-block" }} /> Contact
             </div>
-            <h2 style={{ fontSize: "clamp(40px,7vw,100px)", fontFamily: "'Syne', sans-serif", fontWeight: 900, color: "#fff", letterSpacing: -3, lineHeight: 0.95, marginBottom: 16 }}>
+            <h2 style={{ fontSize: "clamp(40px,7vw,100px)", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, color: "#fff", letterSpacing: -3, lineHeight: 0.95, marginBottom: 16 }}>
               Let's work<br /><span style={{ WebkitTextStroke: "2px #00E5FF", color: "transparent" }}>together</span>
             </h2>
             <p style={{ fontSize: 15, color: "#4a6a7a", marginBottom: 60, maxWidth: 400, lineHeight: 1.7, fontWeight: 500 }}>Open to internships, research collaborations, and interesting ML conversations.</p>
@@ -908,7 +907,7 @@ export default function Portfolio() {
               {sent ? (
                 <div style={{ textAlign: "center", padding: "60px 0" }}>
                   <div style={{ fontSize: 60, marginBottom: 20, animation: "float 3s ease-in-out infinite" }}>🚀</div>
-                  <h3 style={{ fontSize: 28, fontFamily: "'Syne', sans-serif", fontWeight: 900, color: "#00FF9D", marginBottom: 10 }}>Message sent!</h3>
+                  <h3 style={{ fontSize: 28, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, color: "#00FF9D", marginBottom: 10 }}>Message sent!</h3>
                   <p style={{ color: "#3a4a5a", fontSize: 14, fontWeight: 600 }}>I'll get back to you soon.</p>
                 </div>
               ) : (
