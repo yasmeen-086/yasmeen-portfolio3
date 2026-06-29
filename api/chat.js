@@ -22,7 +22,6 @@ export default async function handler(req, res) {
       }
     }
 
-    // Ensure starts with user turn
     while (contents.length > 0 && contents[0].role === "model") {
       contents.shift();
     }
@@ -36,9 +35,9 @@ export default async function handler(req, res) {
       body.system_instruction = { parts: [{ text: system }] };
     }
 
-    // Use v1 instead of v1beta, and correct model name
+    // Try gemini-pro which is universally available
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-001:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
